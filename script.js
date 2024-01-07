@@ -33,7 +33,7 @@
 
           if (priceElement) {
             const currentPrice = parseFloat(priceElement.textContent.replace("zł", "").replace(",", "."));
-            const discountMatch = 1;
+            let discountMatch = 1;
             if(discountElement){
               discountMatch = discountElement.textContent.match(/\d+/);
             }
