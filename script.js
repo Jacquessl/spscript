@@ -31,9 +31,12 @@
           const priceElement = container.querySelector('div.ItemPreview-priceValue');
           const discountElement = container.querySelector('div.GradientLabel.ItemPreview-discount');
 
-          if (priceElement && discountElement) {
+          if (priceElement) {
             const currentPrice = parseFloat(priceElement.textContent.replace("zł", "").replace(",", "."));
-            const discountMatch = discountElement.textContent.match(/\d+/);
+            const discountMatch = 1;
+            if(discountElement){
+              discountMatch = discountElement.textContent.match(/\d+/);
+            }
             if(mapa.get(curName) > currentPrice){
               if(!setDodanych.has(currentPrice)){
                 const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
@@ -69,7 +72,7 @@
                       if (openCartButton) {
                         openCartButton.click();
   
-                        await new Promise(r => setTimeout(r, 500)); // Wait for the cart to open
+                        await new Promise(r => setTimeout(r, 500));
   
                         const checkoutButton = document.querySelector('div.CartDropdown-btns button.CartDropdown-checkout');
 
