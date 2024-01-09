@@ -1,19 +1,19 @@
 (async () => {
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 2.4);
-  mapa.set("Skrzynia Załamania", 1.4);
-  mapa.set("Skrzynia Rewolucji", 2);
-  mapa.set("Skrzynia Snów i koszmarów", 3);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.7);
-  mapa.set("Skrzynia Odrzutu", 0.8);
-  mapa.set("Skrzynia Clutch", 1.3);
-  mapa.set("Skrzynia Strefy zagrożenia", 1.9);
+  mapa.set("Skrzynia Pryzmatu 2", 2.3);
+  mapa.set("Skrzynia Załamania", 1.6);
+  mapa.set("Skrzynia Rewolucji", 2.1);
+  mapa.set("Skrzynia Snów i koszmarów", 3.2);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.8);
+  mapa.set("Skrzynia Odrzutu", 0.9);
+  mapa.set("Skrzynia Clutch", 1.4);
+  mapa.set("Skrzynia Strefy zagrożenia", 2);
   mapa.set("Skrzynia Pryzmatu", 1.9);
-  mapa.set("Skrzynia Spektrum 2", 4.2);
   mapa.set("Skrzynia Horyzontu", 2.4);
-  mapa.set("Skrzynia CS20", 1.8);
-  mapa.set("Skrzynia Falcjonu", 2.4);
-  mapa.set("Skrzynia Cienia", 2.4);
+  mapa.set("Skrzynia CS20", 1.9);
+  mapa.set("Skrzynia Falcjonu", 2.5);
+  mapa.set("Skrzynia Cienia", 2.5);
+  mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
   let kupujemy = false;
@@ -49,7 +49,7 @@
                 lastPrice = currentPrice;
               }
             }
-            if(last!=curName && suma > 10){
+            else if(suma > 10){
               kupujemy = true;
             }
             if(last!=curName){
@@ -58,7 +58,7 @@
             if (discountMatch) {
               const discountValue = parseInt(discountMatch[0]);
   
-              if ((currentPrice > 10 && discountValue >= 30) || kupujemy) {
+              if ((currentPrice > 10 && discountValue >= 35) || kupujemy) {
                 const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
                 if (addToCartButton) {
                   if(!kupujemy){
