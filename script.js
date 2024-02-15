@@ -1,18 +1,18 @@
 (async () => {
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 2.3);
-  mapa.set("Skrzynia Załamania", 1.6);
-  mapa.set("Skrzynia Rewolucji", 2.1);
-  mapa.set("Skrzynia Snów i koszmarów", 3.2);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.8);
-  mapa.set("Skrzynia Odrzutu", 0.9);
-  mapa.set("Skrzynia Clutch", 1.4);
-  mapa.set("Skrzynia Strefy zagrożenia", 2);
-  mapa.set("Skrzynia Pryzmatu", 1.9);
-  mapa.set("Skrzynia Horyzontu", 2.4);
-  mapa.set("Skrzynia CS20", 1.9);
-  mapa.set("Skrzynia Falcjonu", 2.5);
-  mapa.set("Skrzynia Cienia", 2.5);
+  mapa.set("Skrzynia Pryzmatu 2", 1.82);
+  mapa.set("Skrzynia Załamania", 0.87);
+  mapa.set("Skrzynia Rewolucji", 1.1);
+  mapa.set("Skrzynia Snów i koszmarów", 2.14);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.76);
+  mapa.set("Skrzynia Odrzutu", 0.59);
+  mapa.set("Skrzynia Clutch", 1.23);
+  mapa.set("Skrzynia Strefy zagrożenia", 1.72);
+  mapa.set("Skrzynia Pryzmatu", 1.53);
+  mapa.set("Skrzynia Horyzontu", 1.78);
+  mapa.set("Skrzynia CS20", 1.66);
+  mapa.set("Skrzynia Falcjonu", 2.08);
+  mapa.set("Skrzynia Cienia", 2.09);
   mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
@@ -24,7 +24,25 @@
       await new Promise(r => setTimeout(r, 100));
       try {
         const itemContainers = document.querySelectorAll('div.CatalogPage-item--grid');
-  
+        var przycisk = document.querySelector('.LiveBtn');
+        var przyciskZamknij = document.querySelector('.ButtonSimple');
+        if (przycisk && !przycisk.classList.contains('LiveBtn--isActive')) {
+          przycisk.click();
+          if(suma == 0){
+            setDodanych.clear();
+          }
+        }
+        if(przyciskZamknij && suma == 0){
+          //przyciskZamknij.click();
+        }
+        var countElement = document.querySelector('.CartButton-count');
+        if (countElement) {
+          var countValue = countElement.innerText || countElement.textContent;
+          var intValue = parseInt(countValue, 10);
+          if(intValue == 0){
+              suma = 0;
+          }
+        }
         for (const container of itemContainers) {
           const nameElement = container.querySelector('div.ItemPreview-itemName');
           const curName = nameElement.textContent;
@@ -33,11 +51,7 @@
 
           if (priceElement) {
             const currentPrice = parseFloat(priceElement.textContent.replace("zł", "").replace(",", "."));
-            let discountMatch = 1;
-            if(discountElement){
-              discountMatch = discountElement.textContent.match(/\d+/);
-            }
-            if(mapa.get(curName) > currentPrice){
+             if(mapa.get(curName) > currentPrice){              
               if(!setDodanych.has(currentPrice)){
                 const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
                 if (addToCartButton) {
@@ -49,70 +63,78 @@
                 lastPrice = currentPrice;
               }
             }
+            else if(discountElement){
+              discountValue = parseInt(discountElement.textContent.match(/\d+/));
+              if(!setDodanych.has(currentPrice)){
+                if(currentPrice > 3 && discountValue >= 35 || currentPrice > 10 && discountValue >= 30){
+                  const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
+                  if (addToCartButton) {
+                    addToCartButton.click();
+                  }
+                  suma+=currentPrice;
+                  last = curName;
+                  kupujemy = false;
+                  lastPrice = currentPrice;
+                }
+              }
+            }
             else if(suma > 10){
               kupujemy = true;
             }
             if(last!=curName){
               setDodanych.add(lastPrice);
             }
-            if (discountMatch) {
-              const discountValue = parseInt(discountMatch[0]);
   
-              if ((currentPrice > 10 && discountValue >= 35) || kupujemy) {
-                const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
-                if (addToCartButton) {
-                  if(!kupujemy){
-                    addToCartButton.click();
-                  }
-                  while (true) {
-                    const offset = Math.random() + 1.2;
-                    await new Promise(r => setTimeout(r, 100 * offset));
-                    try {
-                      const openCartButton = document.querySelector('div.HeaderContainer-cart button.CartButton-button');
-                      if (openCartButton) {
-                        openCartButton.click();
-  
-                        await new Promise(r => setTimeout(r, 500));
-  
-                        const checkoutButton = document.querySelector('div.CartDropdown-btns button.CartDropdown-checkout');
+            if (kupujemy) {
+              while (true) {
+                const offset = Math.random() + 1.2;
+                await new Promise(r => setTimeout(r, 100 * offset));
+                try {
+                  const openCartButton = document.querySelector('div.HeaderContainer-cart button.CartButton-button');
+                  if (openCartButton) {
+                    openCartButton.click();
+
+                    await new Promise(r => setTimeout(r, 500));
+
+                    const checkoutButton = document.querySelector('div.CartDropdown-btns button.CartDropdown-checkout');
 
 
-                        if (checkoutButton) {
-                          checkoutButton.click();
-  
-                          await new Promise(resolve => {
-                            const observer = new MutationObserver(() => {
-                              if (window.location.href.includes('https://skinport.com/pl/cart')) {
-                                observer.disconnect();
-                                resolve();
-                              }
-                            });
-                            observer.observe(document.body, { childList: true, subtree: true });
-                          });
-  
-                          const checkboxToClick1 = document.querySelector('[id^="cb-tradelock-"]');
-                          const checkboxToClick2 = document.querySelector('[id^="cb-cancellation-"]');
-  
-                          if(!checkboxToClick1){
-                                  checkboxToClick2.click();
-                          }else{
-                                                    checkboxToClick1.click();
-                                                    checkboxToClick2.click();
+                    if (checkoutButton) {
+                      checkoutButton.click();
+
+                      await new Promise(resolve => {
+                        const observer = new MutationObserver(() => {
+                          if (window.location.href.includes('https://skinport.com/pl/cart')) {
+                            observer.disconnect();
+                            resolve();
                           }
-                          const checkoutBtn = document.querySelector('button.SubmitButton.CartSummary-checkoutBtn');
-                          if (checkoutBtn) {
-                            checkoutBtn.click();
-                 
-                            
-                            }                  
-                            break;
-                        }
+                        });
+                        observer.observe(document.body, { childList: true, subtree: true });
+                      });
+
+                      const checkboxToClick1 = document.querySelector('[id^="cb-tradelock-"]');
+                      const checkboxToClick2 = document.querySelector('[id^="cb-cancellation-"]');
+
+                      if(!checkboxToClick1){
+                              checkboxToClick2.click();
+                      }else{
+                                                checkboxToClick1.click();
+                                                checkboxToClick2.click();
                       }
-                    } catch { null; }
+                      const checkoutBtn = document.querySelector('button.SubmitButton.CartSummary-checkoutBtn');
+                      if (checkoutBtn) {
+                        checkoutBtn.click();
+              
+                        
+                        }                  
+                        break;
+                    }
                   }
-                }
+                } catch { null; }
               }
             }
+            
+            
           }
         }
       } catch { null; }
