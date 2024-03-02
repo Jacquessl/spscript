@@ -88,13 +88,13 @@
             if (kupujemy) {
               while (true) {
                 const offset = Math.random() + 1.2;
-                await new Promise(r => setTimeout(r, 100 * offset));
+                await new Promise(r => setTimeout(r, 50 * offset));
                 try {
                   const openCartButton = document.querySelector('div.HeaderContainer-cart button.CartButton-button');
                   if (openCartButton) {
                     openCartButton.click();
 
-                    await new Promise(r => setTimeout(r, 500));
+                    await new Promise(r => setTimeout(r, 50));
 
                     const checkoutButton = document.querySelector('div.CartDropdown-btns button.CartDropdown-checkout');
 
@@ -114,20 +114,24 @@
 
                       const checkboxToClick1 = document.querySelector('[id^="cb-tradelock-"]');
                       const checkboxToClick2 = document.querySelector('[id^="cb-cancellation-"]');
-
-                      if(!checkboxToClick1){
-                              checkboxToClick2.click();
-                      }else{
-                                                checkboxToClick1.click();
-                                                checkboxToClick2.click();
-                      }
-                      const checkoutBtn = document.querySelector('button.SubmitButton.CartSummary-checkoutBtn');
-                      if (checkoutBtn) {
-                        checkoutBtn.click();
-              
-                        
-                        }                  
-                        break;
+                      while(checkboxToClick2){
+                        if(!checkboxToClick1){
+                                checkboxToClick2.click();
+                        }else{
+                                                  checkboxToClick1.click();
+                                                  checkboxToClick2.click();
+                        }
+                        const checkoutBtn = document.querySelector('button.SubmitButton.CartSummary-checkoutBtn');
+                        if (checkoutBtn) {
+                          checkoutBtn.click();
+                
+                          
+                          }
+                          if(checkboxToClick2.checked){
+                            await new Promise(resolve => setTimeout(resolve, 50));
+                          }
+                      }                  
+                      break;
                     }
                   }
                 } catch { null; }
