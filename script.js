@@ -1,18 +1,18 @@
 (async () => {
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 1.82);
-  mapa.set("Skrzynia Załamania", 0.87);
-  mapa.set("Skrzynia Rewolucji", 1.1);
-  mapa.set("Skrzynia Snów i koszmarów", 2.14);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.76);
-  mapa.set("Skrzynia Odrzutu", 0.59);
-  mapa.set("Skrzynia Clutch", 1.23);
-  mapa.set("Skrzynia Strefy zagrożenia", 1.72);
-  mapa.set("Skrzynia Pryzmatu", 1.53);
-  mapa.set("Skrzynia Horyzontu", 1.78);
-  mapa.set("Skrzynia CS20", 1.66);
-  mapa.set("Skrzynia Falcjonu", 2.08);
-  mapa.set("Skrzynia Cienia", 2.09);
+  mapa.set("Skrzynia Pryzmatu 2", 1.87);
+  mapa.set("Skrzynia Załamania", 0.77);
+  mapa.set("Skrzynia Rewolucji", 1.16);
+  mapa.set("Skrzynia Snów i koszmarów", 2.64);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.61);
+  mapa.set("Skrzynia Odrzutu", 0.52);
+  mapa.set("Skrzynia Clutch", 1.26);
+  mapa.set("Skrzynia Strefy zagrożenia", 1.69);
+  mapa.set("Skrzynia Pryzmatu", 1.6);
+  mapa.set("Skrzynia Horyzontu", 1.9);
+  mapa.set("Skrzynia CS20", 1.48);
+  mapa.set("Skrzynia Falcjonu", 2.03);
+  mapa.set("Skrzynia Cienia", 2.06);
   mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
@@ -88,13 +88,13 @@
             if (kupujemy) {
               while (true) {
                 const offset = Math.random() + 1.2;
-                await new Promise(r => setTimeout(r, 50 * offset));
+                await new Promise(r => setTimeout(r, 100 * offset));
                 try {
                   const openCartButton = document.querySelector('div.HeaderContainer-cart button.CartButton-button');
                   if (openCartButton) {
                     openCartButton.click();
 
-                    await new Promise(r => setTimeout(r, 50));
+                    await new Promise(r => setTimeout(r, 500));
 
                     const checkoutButton = document.querySelector('div.CartDropdown-btns button.CartDropdown-checkout');
 
@@ -116,20 +116,18 @@
                       const checkboxToClick2 = document.querySelector('[id^="cb-cancellation-"]');
                       while(checkboxToClick2){
                         if(!checkboxToClick1){
-                                checkboxToClick2.click();
+                          checkboxToClick2.click();
                         }else{
-                                                  checkboxToClick1.click();
-                                                  checkboxToClick2.click();
+                          checkboxToClick1.click();
+                          checkboxToClick2.click();
                         }
                         const checkoutBtn = document.querySelector('button.SubmitButton.CartSummary-checkoutBtn');
                         if (checkoutBtn) {
-                          checkoutBtn.click();
-                
-                          
-                          }
-                          if(checkboxToClick2.checked){
-                            await new Promise(resolve => setTimeout(resolve, 50));
-                          }
+                          checkoutBtn.click(); 
+                        }
+                        if(checkboxToClick2.checked){
+                          await new Promise(resolve => setTimeout(resolve, 50));
+                        }
                       }                  
                       break;
                     }
