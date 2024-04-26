@@ -1,18 +1,18 @@
 (async () => {
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 1.87);
-  mapa.set("Skrzynia Załamania", 0.77);
-  mapa.set("Skrzynia Rewolucji", 1.16);
-  mapa.set("Skrzynia Snów i koszmarów", 2.64);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.61);
-  mapa.set("Skrzynia Odrzutu", 0.52);
-  mapa.set("Skrzynia Clutch", 1.26);
-  mapa.set("Skrzynia Strefy zagrożenia", 1.69);
-  mapa.set("Skrzynia Pryzmatu", 1.6);
-  mapa.set("Skrzynia Horyzontu", 1.9);
-  mapa.set("Skrzynia CS20", 1.48);
-  mapa.set("Skrzynia Falcjonu", 2.03);
-  mapa.set("Skrzynia Cienia", 2.06);
+  mapa.set("Skrzynia Pryzmatu 2", 2.01);
+  mapa.set("Skrzynia Załamania", 0.85);
+  mapa.set("Skrzynia Rewolucji", 1.08);
+  mapa.set("Skrzynia Snów i koszmarów", 2.86);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.69);
+  mapa.set("Skrzynia Odrzutu", 0.54);
+  mapa.set("Skrzynia Clutch", 1.37);
+  mapa.set("Skrzynia Strefy zagrożenia", 1.77);
+  mapa.set("Skrzynia Pryzmatu", 1.62);
+  mapa.set("Skrzynia Horyzontu", 2.11);
+  mapa.set("Skrzynia CS20", 1.44);
+  mapa.set("Skrzynia Falcjonu", 2.13);
+  mapa.set("Skrzynia Cienia", 2.20);
   mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
