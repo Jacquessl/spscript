@@ -7,7 +7,7 @@ while True:
         if pozycja is not None:
             pyautogui.moveTo(pozycja)
             pyautogui.click()
-            pyautogui.write('425')
+            pyautogui.write()
             pyautogui.moveTo(1040, 453)
             pyautogui.click()
         else:
