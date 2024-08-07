@@ -1,18 +1,18 @@
 (async () => {
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 1.75);
-  mapa.set("Skrzynia Załamania", 0.59);
+  mapa.set("Skrzynia Pryzmatu 2", 1.68);
+  mapa.set("Skrzynia Załamania", 0.72);
   mapa.set("Skrzynia Rewolucji", 0.93);
-  mapa.set("Skrzynia Snów i koszmarów", 2.77);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.59);
-  mapa.set("Skrzynia Odrzutu", 0.42);
-  mapa.set("Skrzynia Clutch", 1.17);
-  mapa.set("Skrzynia Strefy zagrożenia", 1.68);
-  mapa.set("Skrzynia Pryzmatu", 1.56);
-  mapa.set("Skrzynia Horyzontu", 2.25);
-  mapa.set("Skrzynia CS20", 1.35);
-  mapa.set("Skrzynia Falcjonu", 1.94);
-  mapa.set("Skrzynia Cienia", 2.2);
+  mapa.set("Skrzynia Snów i koszmarów", 3.43);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.53);
+  mapa.set("Skrzynia Odrzutu", 0.44);
+  mapa.set("Skrzynia Clutch", 1.06);
+  mapa.set("Skrzynia Strefy zagrożenia", 1.69);
+  mapa.set("Skrzynia Pryzmatu", 1.63);
+  mapa.set("Skrzynia Horyzontu", 2.38);
+  mapa.set("Skrzynia CS20", 1.52);
+  mapa.set("Skrzynia Falcjonu", 2.21);
+  mapa.set("Skrzynia Cienia", 2.18);
   mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
@@ -44,11 +44,20 @@
           }
         }
         for (const container of itemContainers) {
+          const stickers = container.querySelectorAll('.ItemPreview-sticker');
+          const jestKato = false;
+
+          for (const sticker of stickers) {
+              if(sticker.alt.includes("Katowice 2014")){
+                jestKato = true;
+                break;
+              }
+          }
           const nameElement = container.querySelector('div.ItemPreview-itemName');
           const curName = nameElement.textContent;
           const priceElement = container.querySelector('div.ItemPreview-priceValue');
           const discountElement = container.querySelector('div.GradientLabel.ItemPreview-discount');
-
+          const suggestedPrice = container.querySelector('div.ItemPreview-oldPrice');
           if (priceElement) {
             const currentPrice = parseFloat(priceElement.textContent.replace("zł", "").replace(",", "."));
              if(mapa.get(curName) > currentPrice){              
@@ -63,10 +72,10 @@
                 lastPrice = currentPrice;
               }
             }
-            else if(discountElement){
+            else if(discountElement || (jestKato && priceElement<suggestedPrice*1.25)){
               discountValue = parseInt(discountElement.textContent.match(/\d+/));
               if(!setDodanych.has(currentPrice)){
-                if(currentPrice > 3 && discountValue >= 35 || currentPrice > 10 && discountValue >= 30){
+                if(currentPrice > 3 && discountValue >= 35 || currentPrice > 10 && discountValue >= 33){
                   const addToCartButton = container.querySelector('button.ItemPreview-mainAction');
                   if (addToCartButton) {
                     addToCartButton.click();
@@ -84,7 +93,6 @@
             if(last!=curName){
               setDodanych.add(lastPrice);
             }
-  
             if (kupujemy) {
               while (true) {
                 const offset = Math.random() + 1.2;
