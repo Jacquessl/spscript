@@ -1,19 +1,19 @@
-(async () => {
+(async () => { //0.75 dla normach 0.8 dla 
   let mapa = new Map();
-  mapa.set("Skrzynia Pryzmatu 2", 2.25);
-  mapa.set("Skrzynia Załamania", 0.81);
-  mapa.set("Skrzynia Rewolucji", 1.1);
-  mapa.set("Skrzynia Snów i koszmarów", 4.18);
-  mapa.set("Skrzynia Ukąszenia Węża", 0.62);
+  mapa.set("Skrzynia Pryzmatu 2", 2.53); //dis
+  mapa.set("Skrzynia Załamania", 0.8);
+  mapa.set("Skrzynia Rewolucji", 1.46);
+  mapa.set("Skrzynia Snów i koszmarów", 4.67);
+  mapa.set("Skrzynia Ukąszenia Węża", 0.92); //dis
   mapa.set("Skrzynia Odrzutu", 0.56);
-  mapa.set("Skrzynia Clutch", 1.27);
-  mapa.set("Skrzynia Strefy zagrożenia", 2.06);
-  mapa.set("Skrzynia Pryzmatu", 1.96);
-  mapa.set("Skrzynia Horyzontu", 2.77);
-  mapa.set("Skrzynia CS20", 1.76);
-  mapa.set("Skrzynia Falcjonu", 2.8);
-  mapa.set("Skrzynia Cienia", 2.73);
-  mapa.set("Kilowatt Case", 2.27);
+  mapa.set("Skrzynia Clutch", 1.66); //dis
+  mapa.set("Skrzynia Strefy zagrożenia", 2.29); //dis
+  mapa.set("Skrzynia Pryzmatu", 2.36); //dis
+  mapa.set("Skrzynia Horyzontu", 3.14); //dis
+  mapa.set("Skrzynia CS20", 1.8); //dis
+  mapa.set("Skrzynia Falcjonu", 3.28); //dis
+  mapa.set("Skrzynia Cienia", 2.78); //dis
+  mapa.set("Kilowatt Case", 2.18);
   mapa.set("Skrzynia operacji Shattered Web", 5)
   let suma = 0;
   let last = "";
